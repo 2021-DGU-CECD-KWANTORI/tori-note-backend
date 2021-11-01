@@ -5,7 +5,7 @@ const Script = require('../models/Script');
 /* GET 슬라이드에 맞는 스크립트 조회 */
 router.get('/slide', async function (req, res) {
 	var contents = "";
-	var scriptsCollections = await Script.find({ "start": req.body.start });
+	var scriptsCollections = await Script.find({ "start": req.query.start });
 	scriptsCollections.forEach(element => contents += element.content);
 	res.send(contents);
 });

@@ -6,7 +6,7 @@ const Image = require('../models/Image');
 
 /* GET 실시간 image 전송 */
 router.get('/images', async function (req, res) {
-	var lecture_id = req.body.id; // choi
+	var lecture_id = req.query.id; // choi
 	var imagesAllCollections = await Image.find({ id: { $regex: lecture_id + "_*" } });
 	var imagesCollections = [];
 

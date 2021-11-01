@@ -20,8 +20,8 @@ router.get('/', async function (req, res) {
 
 router.get('/note', async function (req, res) {
 
-	var lecture_name = req.body.lecture_name; // 컴퓨터네트워크 
-	var date = req.body.date; // 20211011
+	var lecture_name = req.query.lecture_name; // 컴퓨터네트워크 
+	var date = req.query.date; // 20211011
 
 
 	var imagesAllCollections = await Image.find({ "lecture_name": lecture_name, "date": date });
