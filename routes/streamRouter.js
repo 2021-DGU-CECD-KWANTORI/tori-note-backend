@@ -94,7 +94,8 @@ router.post('/', upload.any(), async function (req, res, next) {
 		lecture_name: previousInfo.get("lecture_name"),
 		date: previousInfo.get("date"),
 		id: previousInfo.get("id"),
-		image: previousInfo.get("image")
+		image: previousInfo.get("image"),
+		start : previousInfo.get("start")
 	});
 
 	var prevScript = new Script({
