@@ -17,6 +17,7 @@ router.get('/images', async function (req, res) {
 		'id': element.id,
 		'lecture_name': element.lecture_name,
 		'date': element.date,
+		'start' : element.start,
 		'image': element.image
 	}));
 
