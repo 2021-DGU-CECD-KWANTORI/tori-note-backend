@@ -8,7 +8,7 @@ const fs = require('fs');
 /* GET 슬라이드에 맞는 스크립트 조회 */
 router.get('', async function (req, res) {
 	var summaries = "";
-    var lecture_id = req.query.id; // choi
+    var lecture_id = req.body.id; // choi
 	var summariesCollections = await Summary.find({ id: { $regex: lecture_id + "_*" } },{_id:0, summary:1});
 
 	summariesCollections.forEach(element => {

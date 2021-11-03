@@ -3,9 +3,6 @@ var request = require('request');
 
 module.exports.keyword = function (summaries) {
 
-	console.log("making wordCloud");
-	console.log(summaries);
-
 	const header = {
 		'content-type': 'application/json'
 	};
@@ -24,8 +21,7 @@ module.exports.keyword = function (summaries) {
             json : true
         }, function (error, response, body) {
 			if (!error && response.statusCode == 200) {
-				console.log("Keyword post complete");
-
+				console.log("wordcloud post complete");
 				resolve(body.wordcloud);
 			} else {
 				reject(error);
