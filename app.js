@@ -13,6 +13,7 @@ var streamRouter = require('./routes/streamRouter');
 var scriptRouter = require('./routes/scriptRouter');
 var timelineRouter = require('./routes/timelineRouter');
 var storageRouter = require('./routes/storageRouter');
+var keywordRouter = require('./routes/keywordRouter');
 
 var app = express();
 
@@ -26,5 +27,6 @@ app.use('/stream', streamRouter);
 app.use('/script', scriptRouter);
 app.use('/timeline', timelineRouter);
 app.use('/storage', storageRouter);
+app.use('/keyword', keywordRouter);
 
 module.exports = app;
