@@ -24,8 +24,12 @@ router.get('', async function (req, res) {
 	} catch(error) {
 		console.log(error);
 	}
-
-	res.send(keywords);
+	
+	var result = [];
+	if(keywords.length>6){
+		result = keywords.slice(0,6);
+	}
+	res.send(result);
 });
 
 

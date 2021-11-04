@@ -12,6 +12,7 @@ router.get('/', async function (req, res) {
 	imagesAllCollections.forEach(element => imagesCollections.push({
 		'lecture_name': element.lecture_name,
 		'date': element.date,
+		'image': element.image
 	}));
 
 	res.send(imagesCollections);
