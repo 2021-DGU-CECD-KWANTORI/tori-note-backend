@@ -20,15 +20,12 @@ router.get('', async function (req, res) {
 	});
 
 	try{
-		var wordcloud = await keywordService.keyword(summaries);
+		var keywords = await keywordService.keyword(summaries);
 	} catch(error) {
 		console.log(error);
 	}
 
-	res.send({
-		'imgURL': 'data:image/jpeg;base64',
-		'image': wordcloud
-	});
+	res.send(keywords);
 });
 
 

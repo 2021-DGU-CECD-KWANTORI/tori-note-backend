@@ -1,3 +1,4 @@
+const { sumAsync } = require('opencv4nodejs');
 var request = require('request');
 
 
@@ -21,8 +22,8 @@ module.exports.keyword = function (summaries) {
             json : true
         }, function (error, response, body) {
 			if (!error && response.statusCode == 200) {
-				console.log("wordcloud post complete");
-				resolve(body.wordcloud);
+				console.log("keywords post complete");
+				resolve(body.keywords);
 			} else {
 				reject(error);
 			}
