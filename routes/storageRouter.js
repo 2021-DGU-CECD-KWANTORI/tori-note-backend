@@ -6,7 +6,7 @@ const Summary = require('../models/Summary');
 const Keyword = require('../models/Keyword');
 
 router.get('/', async function (req, res) {
-	var imagesAllCollections = await Image.aggregate([{$group:{"_id":{"lecture_name":"$lecture_name", "date":"$date"},image:{$first:"$id"}}}] );
+	var imagesAllCollections = await Image.aggregate([{$group:{"_id":{"lecture_name":"$lecture_name", "date":"$date"},image:{$first:"$image"}}}] );
 	var keywordAllCollections = await Keyword.find()
 	var resultCollections = [];
 
