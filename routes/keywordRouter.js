@@ -2,14 +2,15 @@ var express = require('express');
 var router = express.Router();
 var keywordService = require('../services/keywordService');
 const Summary = require('../models/Summary');
+const Keyword = require('../models/Keyword');
 const fs = require('fs');
 
 
-/* GET 슬라이드에 맞는 스크립트 조회 */
-router.get('', async function (req, res) {
+router.post('', async function (req, res) {
+	res.send("request Keyword");
+
 	var summaries = "";
-    var lecture_id = req.body.id; // choi
-	var summariesCollections = await Summary.find({ id: { $regex: lecture_id + "_*" } },{_id:0, summary:1});
+	var summariesCollections = await Summary.find({ lecture_name: req.body.lecture_name, date: req.body.date},{_id:0, summary:1});
 
 	summariesCollections.forEach(element => {
 		var inner = "";
@@ -24,8 +25,24 @@ router.get('', async function (req, res) {
 	} catch(error) {
 		console.log(error);
 	}
+	
+	if(keywords.length>6){
+		keywords = keywords.slice(0,6);
+	}
 
-	res.send(keywords);
+	var keyword = new Keyword({
+		lecture_name: req.body.lecture_name,
+		date: req.body.date,
+		id: req.body.id,
+		keyword:keywords
+	});
+
+	await keyword.save().then((keyword) => {
+		console.log("Keyword saved");
+	}).catch((err) => {
+		console.log(err);
+	});
+
 });
 
 
