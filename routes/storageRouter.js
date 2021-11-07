@@ -3,19 +3,29 @@ var router = express.Router();
 const Script = require('../models/Script');
 const Image = require('../models/Image');
 const Summary = require('../models/Summary');
-
+const Keyword = require('../models/Keyword');
 
 router.get('/', async function (req, res) {
-	var imagesAllCollections = await Image.find();
-	var imagesCollections = [];
+	var imagesAllCollections = await Image.aggregate([{$group:{"_id":{"lecture_name":"$lecture_name", "date":"$date"},image:{$first:"$image"}}}] );
+	var keywordAllCollections = await Keyword.find()
+	var resultCollections = [];
 
-	imagesAllCollections.forEach(element => imagesCollections.push({
-		'lecture_name': element.lecture_name,
-		'date': element.date,
+	imagesAllCollections.forEach(element => resultCollections.push({
+		'lecture_name': element._id.lecture_name,
+		'date':element._id.date,
 		'image': element.image
 	}));
 
-	res.send(imagesCollections);
+	keywordAllCollections.forEach(function (currentValue, index, array) {
+		try{
+			var index = resultCollections.findIndex(i => i.lecture_name == currentValue.lecture_name && i.date==currentValue.date); 
+			resultCollections[index]['keyword'] = currentValue.keyword;
+		}catch{
+			console.log('keyword error');
+		}
+	});
+	
+	res.send(resultCollections);
 });
 
 
